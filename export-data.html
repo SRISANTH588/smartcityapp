@@ -1,57 +1,112 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Export Data</title>
+    <title>Export Data - Smart City</title>
     <style>
-        body { font-family: Arial; padding: 20px; max-width: 800px; margin: 0 auto; }
-        textarea { width: 100%; height: 400px; margin: 10px 0; padding: 10px; }
-        button { padding: 10px 20px; font-size: 16px; cursor: pointer; margin: 5px; }
+        body { font-family: Arial; padding: 20px; background: #1a1a2e; color: white; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        h1 { color: #3b82f6; }
+        .section { background: #16213e; padding: 20px; margin: 20px 0; border-radius: 10px; }
+        textarea { width: 100%; height: 300px; padding: 10px; font-family: monospace; font-size: 12px; }
+        button { background: #3b82f6; color: white; border: none; padding: 15px 30px; font-size: 16px; cursor: pointer; border-radius: 5px; margin: 10px 5px; }
+        button:hover { background: #2563eb; }
+        .info { background: #0f3460; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .success { background: #10b981; color: white; padding: 10px; border-radius: 5px; display: none; }
     </style>
 </head>
 <body>
-    <h1>Export/Import Smart City Data</h1>
-    
-    <h2>Export Data</h2>
-    <button onclick="exportData()">Export All Data</button>
-    <textarea id="exportArea" readonly placeholder="Exported data will appear here..."></textarea>
-    
-    <h2>Import Data</h2>
-    <textarea id="importArea" placeholder="Paste exported data here..."></textarea>
-    <button onclick="importData()">Import Data</button>
+    <div class="container">
+        <h1>🌆 Smart City Data Manager</h1>
+        
+        <div class="section">
+            <h2>📤 Step 1: Export Your Local Data</h2>
+            <div class="info">
+                <strong>Current Data Found:</strong>
+                <div id="dataInfo">Checking...</div>
+            </div>
+            <button onclick="exportData()" style="background: #10b981;">📥 Export All Data</button>
+            <button onclick="copyToClipboard()" style="background: #f59e0b;">📋 Copy to Clipboard</button>
+            <textarea id="exportArea" readonly></textarea>
+        </div>
+        
+        <div class="section">
+            <h2>📥 Step 2: Import Data (Use on GitHub Pages)</h2>
+            <textarea id="importArea" placeholder="Paste your exported data here..."></textarea>
+            <button onclick="importData()">✅ Import Data</button>
+            <div id="successMsg" class="success">✅ Data imported successfully! Redirecting to main page...</div>
+        </div>
+    </div>
     
     <script>
+        function checkData() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const issues = JSON.parse(localStorage.getItem('issues') || '[]');
+            const places = JSON.parse(localStorage.getItem('touristPlaces') || '[]');
+            const buses = JSON.parse(localStorage.getItem('buses') || '[]');
+            const emergency = JSON.parse(localStorage.getItem('emergencyNumbers') || '[]');
+            
+            document.getElementById('dataInfo').innerHTML = `
+                <p>👥 Users: ${users.length}</p>
+                <p>📝 Issues: ${issues.length}</p>
+                <p>🏛️ Tourist Places: ${places.length}</p>
+                <p>🚌 Bus Routes: ${buses.length}</p>
+                <p>📞 Emergency Numbers: ${emergency.length}</p>
+            `;
+        }
+        
         function exportData() {
-            const data = {
-                users: localStorage.getItem('users'),
-                issues: localStorage.getItem('issues'),
-                touristPlaces: localStorage.getItem('touristPlaces'),
-                buses: localStorage.getItem('buses'),
-                emergencyNumbers: localStorage.getItem('emergencyNumbers'),
-                alerts: localStorage.getItem('alerts'),
-                parkingSpots: localStorage.getItem('parkingSpots'),
-                theme: localStorage.getItem('theme'),
-                accentColor: localStorage.getItem('accentColor')
-            };
-            document.getElementById('exportArea').value = JSON.stringify(data);
-            alert('Data exported! Copy the text and save it.');
+            const data = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                data[key] = localStorage.getItem(key);
+            }
+            const jsonStr = JSON.stringify(data, null, 2);
+            document.getElementById('exportArea').value = jsonStr;
+            alert('✅ Data exported! Now copy it using the "Copy to Clipboard" button.');
+        }
+        
+        function copyToClipboard() {
+            const textarea = document.getElementById('exportArea');
+            if (!textarea.value) {
+                alert('❌ Please export data first!');
+                return;
+            }
+            textarea.select();
+            document.execCommand('copy');
+            alert('✅ Copied to clipboard! Now:\n1. Go to your GitHub Pages site\n2. Open this same page (export-data.html)\n3. Paste in the Import section\n4. Click Import Data');
         }
         
         function importData() {
-            const data = document.getElementById('importArea').value;
+            const data = document.getElementById('importArea').value.trim();
             if (!data) {
-                alert('Please paste data first!');
+                alert('❌ Please paste exported data first!');
                 return;
             }
+            
             try {
                 const parsed = JSON.parse(data);
+                let count = 0;
+                
                 Object.keys(parsed).forEach(key => {
-                    if (parsed[key]) localStorage.setItem(key, parsed[key]);
+                    if (parsed[key]) {
+                        localStorage.setItem(key, parsed[key]);
+                        count++;
+                    }
                 });
-                alert('Data imported successfully! Refresh the page.');
+                
+                document.getElementById('successMsg').style.display = 'block';
+                
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                
             } catch (e) {
-                alert('Invalid data format!');
+                alert('❌ Invalid data format! Please copy the exact exported data.');
+                console.error(e);
             }
         }
+        
+        checkData();
     </script>
 </body>
 </html>
