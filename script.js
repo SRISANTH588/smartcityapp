@@ -103,6 +103,43 @@ if (!storage.local.get('users')) {
     storage.local.set('users', defaultUsers);
 }
 
+if (!storage.local.get('touristPlaces')) {
+    const defaultPlaces = [
+        { id: 1, name: 'Central Park', image: '', description: 'Beautiful urban park with gardens and lakes', address: 'New York, NY 10022' },
+        { id: 2, name: 'City Museum', image: '', description: 'Historic museum showcasing local culture and art', address: 'Main Street, Downtown' },
+        { id: 3, name: 'Waterfront Plaza', image: '', description: 'Scenic waterfront area with restaurants and shops', address: 'Harbor District' }
+    ];
+    storage.local.set('touristPlaces', defaultPlaces);
+}
+
+if (!storage.local.get('buses')) {
+    const defaultBuses = [
+        { id: 1, number: '42', route: 'Downtown - Airport', time: '5 min' },
+        { id: 2, number: '18', route: 'University - Mall', time: '8 min' },
+        { id: 3, number: '7', route: 'Station - Beach', time: '12 min' }
+    ];
+    storage.local.set('buses', defaultBuses);
+}
+
+if (!storage.local.get('emergencyNumbers')) {
+    const defaultEmergency = [
+        { id: 1, service: 'Police', number: '911', address: '', mapLink: '' },
+        { id: 2, service: 'Fire Department', number: '911', address: '', mapLink: '' },
+        { id: 3, service: 'Ambulance', number: '911', address: '', mapLink: '' },
+        { id: 4, service: 'City Hall', number: '311', address: '', mapLink: '' }
+    ];
+    storage.local.set('emergencyNumbers', defaultEmergency);
+}
+
+if (!storage.local.get('alerts')) {
+    const defaultAlerts = [
+        { id: 1, type: 'warning', message: 'Heavy traffic on Main St', time: Date.now() - 300000 },
+        { id: 2, type: 'info', message: 'Street cleaning scheduled', time: Date.now() - 3600000 },
+        { id: 3, type: 'success', message: 'Power restored in Zone 3', time: Date.now() - 7200000 }
+    ];
+    storage.local.set('alerts', defaultAlerts);
+}
+
 const userLoginBtn = document.getElementById('userLoginBtn');
 const adminLoginBtn = document.getElementById('adminLoginBtn');
 const loginRoleInput = document.getElementById('loginRole');
