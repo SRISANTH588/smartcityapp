@@ -228,7 +228,29 @@ const authValidators = {
         if (!/^[0-9]{10}$/.test(v)) return 'Phone number must be exactly 10 digits';
         return '';
     },
-    regPassword: (v) => !v ? 'Password is required' : v.length < 6 ? 'Password must be at least 6 characters' : ''
+    regPassword: (v) => {
+        if (!v) return 'Password is required';
+        if (v.length < 8) return 'Password must be at least 8 characters';
+        if (!/[A-Z]/.test(v)) return 'Password must contain at least one uppercase letter';
+        if (!/[a-z]/.test(v)) return 'Password must contain at least one lowercase letter';
+        if (!/[0-9]/.test(v)) return 'Password must contain at least one number';
+        if (!/[!@#$%^&*(),.?":{}|<>]/.test(v)) return 'Password must contain at least one special character';
+        return '';
+    },
+    adminPassword: (v) => {
+        if (!v) return '';
+        if (v.length < 8) return 'Password must be at least 8 characters';
+        if (!/[A-Z]/.test(v)) return 'Password must contain at least one uppercase letter';
+        if (!/[a-z]/.test(v)) return 'Password must contain at least one lowercase letter';
+        if (!/[0-9]/.test(v)) return 'Password must contain at least one number';
+        if (!/[!@#$%^&*(),.?":{}|<>]/.test(v)) return 'Password must contain at least one special character';
+        return '';
+    },
+    adminPhone: (v) => {
+        if (!v) return '';
+        if (!/^[0-9]{10}$/.test(v)) return 'Phone number must be exactly 10 digits';
+        return '';
+    }
 };
 
 let currentCaptcha = '';
@@ -1487,6 +1509,14 @@ adminForm.addEventListener('submit', (e) => {
     if (phone && !/^[0-9]{10}$/.test(phone)) {
         alert('Phone must be 10 digits if provided');
         return;
+    }
+    
+    if (password) {
+        const pwdError = authValidators.adminPassword(password);
+        if (pwdError) {
+            alert(pwdError);
+            return;
+        }
     }
     
     let users = storage.local.get('users', []);
