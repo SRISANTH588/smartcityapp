@@ -62,7 +62,7 @@ function checkAuth() {
         if (user.role === 'admin') {
             allLinks.forEach(link => {
                 const page = link.getAttribute('data-page');
-                if (page !== 'dashboard' && page !== 'admin') {
+                if (page !== 'admin') {
                     link.parentElement.style.display = 'none';
                 }
             });
@@ -79,6 +79,7 @@ function checkAuth() {
         if (user.role === 'admin') {
             navigateTo('admin');
             setTimeout(() => {
+                renderAdminPanel();
                 initAdminTabs();
             }, 200);
         } else {
@@ -470,15 +471,21 @@ function startLiveClock() {
     const liveTime = document.getElementById('liveTime');
     const activeUsers = document.getElementById('activeUsers');
     const touristCount = document.getElementById('touristCount');
+    const adminLiveTime = document.getElementById('adminLiveTime');
+    const adminActiveUsers = document.getElementById('adminActiveUsers');
     
     setInterval(() => {
         const now = new Date();
-        liveTime.textContent = now.toLocaleTimeString();
+        const timeStr = now.toLocaleTimeString();
+        if (liveTime) liveTime.textContent = timeStr;
+        if (adminLiveTime) adminLiveTime.textContent = timeStr;
     }, 1000);
     
     const updateActiveUsers = () => {
         const users = storage.local.get('users', []);
-        activeUsers.textContent = users.length.toLocaleString();
+        const userCount = users.length.toLocaleString();
+        if (activeUsers) activeUsers.textContent = userCount;
+        if (adminActiveUsers) adminActiveUsers.textContent = userCount;
         
         const places = storage.local.get('touristPlaces', []);
         if (touristCount) touristCount.textContent = places.length;
@@ -1147,6 +1154,11 @@ function renderAdminPanel() {
     document.getElementById('pendingIssues').textContent = issues.filter(i => i.status === 'pending').length;
     const totalPlacesEl = document.getElementById('totalPlaces');
     if (totalPlacesEl) totalPlacesEl.textContent = places.length;
+    
+    const adminLiveTime = document.getElementById('adminLiveTime');
+    const adminActiveUsers = document.getElementById('adminActiveUsers');
+    if (adminLiveTime) adminLiveTime.textContent = new Date().toLocaleTimeString();
+    if (adminActiveUsers) adminActiveUsers.textContent = users.length;
     
     renderAdminUsers();
     renderRegularUsers();

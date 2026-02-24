@@ -54,13 +54,6 @@
                     <button type="submit" class="btn-primary">Login</button>
                 </form>
                 <p class="auth-switch">Don't have an account? <a href="#" id="showRegister">Register as User</a></p>
-                <p class="demo-credentials">
-                    <strong>🔑 Demo Credentials</strong><br>
-                    <small>
-                        <strong>Admin:</strong> srisanth / SASI@1234<br>
-                        <strong>User:</strong> Regular User / user123
-                    </small>
-                </p>
             </div>
 
             <div id="registerForm" class="auth-form">
@@ -92,12 +85,12 @@
     <div id="appScreen" class="app-screen hidden">
     <nav class="navbar">
         <div class="nav-brand">
-            <span class="logo">🏙️</span>
+            <span class="logo">🌆</span>
             <h1>Smart City</h1>
         </div>
         <ul class="nav-menu">
             <li><a href="#dashboard" class="nav-link active" data-page="dashboard">🏙️ Dashboard</a></li>
-            <li><a href="#tourists" class="nav-link" data-page="tourists">🏛️ Famous Places</a></li>
+            <li><a href="#tourists" class="nav-link" data-page="tourists">🌆 Famous Places</a></li>
             <li><a href="#environment" class="nav-link" data-page="environment">🌱 Environment</a></li>
             <li><a href="#services" class="nav-link" data-page="services">🏛️ Services</a></li>
             <li><a href="#report" class="nav-link" data-page="report">📝 Report Issue</a></li>
@@ -139,6 +132,10 @@
                             <span class="badge-icon">🔄</span>
                             <span>Live Updates</span>
                         </div>
+                        <div class="hero-badge warning">
+                            <span class="badge-icon">📡</span>
+                            <span>Connected</span>
+                        </div>
                     </div>
                     
                     <div class="hero-stats">
@@ -161,6 +158,13 @@
                             <div>
                                 <span class="hero-stat-value" id="touristCount">0</span>
                                 <span class="hero-stat-label">Tourist Places</span>
+                            </div>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-icon">📊</span>
+                            <div>
+                                <span class="hero-stat-value" id="systemUptime">99.9%</span>
+                                <span class="hero-stat-label">System Uptime</span>
                             </div>
                         </div>
                     </div>
@@ -440,8 +444,52 @@
 
         <div id="admin" class="page">
             <section class="hero">
-                <h2>Admin Control Center</h2>
-                <p>Comprehensive city management and analytics</p>
+                <h2 style="text-align: center; margin-bottom: 0.5rem;">Admin Control Center</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-secondary);">Comprehensive city management and analytics</p>
+                
+                <div class="hero-content">
+                    <h2>Welcome to Smart City Dashboard</h2>
+                    <p class="hero-subtitle">Real-time Intelligent Urban Management & Monitoring System</p>
+                    
+                    <div class="hero-badges">
+                        <div class="hero-badge success">
+                            <span class="badge-icon">✅</span>
+                            <span>All Systems Operational</span>
+                        </div>
+                        <div class="hero-badge info">
+                            <span class="badge-icon">🔄</span>
+                            <span>Live Updates</span>
+                        </div>
+                        <div class="hero-badge warning">
+                            <span class="badge-icon">🔒</span>
+                            <span>Admin Access</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-icon">🕒</span>
+                            <div>
+                                <span class="hero-stat-value" id="adminLiveTime">00:00:00</span>
+                                <span class="hero-stat-label">Live Time</span>
+                            </div>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-icon">👥</span>
+                            <div>
+                                <span class="hero-stat-value" id="adminActiveUsers">0</span>
+                                <span class="hero-stat-label">Active Citizens</span>
+                            </div>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-icon">📊</span>
+                            <div>
+                                <span class="hero-stat-value" id="adminSystemHealth">100%</span>
+                                <span class="hero-stat-label">System Health</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
             
             <div class="stats-overview">

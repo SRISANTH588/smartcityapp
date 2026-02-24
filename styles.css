@@ -314,8 +314,8 @@ body {
 }
 
 .nav-link.active {
-    color: white;
-    background: var(--accent);
+    color: var(--accent);
+    background: transparent;
 }
 
 .nav-controls {
