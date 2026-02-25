@@ -2,8 +2,8 @@
     --bg-primary: #F8F1E7;
     --bg-secondary: #E0CFC1;
     --bg-card: rgba(224, 207, 193, 0.8);
-    --text-primary: #3E2C23;
-    --text-secondary: #6B5D57;
+    --text-primary: #000000;
+    --text-secondary: #333333;
     --accent: #A67B5B;
     --accent-hover: #8F6A4F;
     --success: #8B9D83;
@@ -16,8 +16,8 @@
     --bg-primary: #FDF6EC;
     --bg-secondary: #F3E5D0;
     --bg-card: #FFFFFF;
-    --text-primary: #3A2E2A;
-    --text-secondary: #6B5D57;
+    --text-primary: #000000;
+    --text-secondary: #333333;
     --border: #E8D5C4;
 }
 
