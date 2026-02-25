@@ -219,7 +219,7 @@ body {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: #000000;
     font-size: 0.95rem;
 }
 
@@ -690,6 +690,7 @@ body {
     overflow: hidden;
     backdrop-filter: blur(10px);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    color: #000000;
 }
 
 .hero::before {
@@ -749,7 +750,7 @@ body {
 
 .hero-subtitle {
     font-size: 1.3rem;
-    color: var(--text-secondary);
+    color: #000000;
     margin-bottom: 2rem;
     font-weight: 500;
     animation: fadeIn 1s ease 0.3s both;
@@ -1177,6 +1178,7 @@ body {
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 2rem;
+    color: #000000;
 }
 
 .form-group {
